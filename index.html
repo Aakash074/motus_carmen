@@ -1,0 +1,137 @@
+---
+title: "Made by Groot"
+layout: page
+image: meta-preview.png
+---
+
+<h1 id="welcome">
+  <span class="hidden-phone">{% include icons/welcome.svg size="64" %}</span> Hey hi, I’m <yeet>Brooke</yeet>!!
+</h1>
+
+<p class="lead">
+  I’m an interactive poet, writer and storyteller. <br class="hidden-phone"> Here's a taste of what I do →
+</p>
+
+{% assign sorted_posts = site.posts | sort: "tile.order" %}
+
+<style>
+{% capture tiles_style %}
+@import "variables";
+@import "mixins";
+
+  tiles {
+    margin-left: 20px;
+    margin-right: -20px;
+    @include media-query($on-phone) {
+      margin-left: 0;
+      margin-right: -20px;
+    }
+  }
+
+  {% for post in sorted_posts %}{% unless post.hidden %}{% unless post.tile.order < 0 %}
+  #tile-{{ post.slug }} {
+    grid-column: auto / span calc({{ post.tile.width }} + 1 {% if post.tile.left %}+ {{ post.tile.left }}{% endif %});
+    grid-row: auto / span calc({{ post.tile.height }} + 1 {% if post.tile.top %}+ {{ post.tile.top}}{% endif %});
+    {% if post.tile.left %}margin-left: calc(40px * {{ post.tile.left }});{% endif %}
+    {% if post.tile.top %}margin-top: calc(40px * {{ post.tile.top }});{% endif %}
+    {% if post.tile.image %}background-image: url({{ post.tile.image | prepend: post.url }}); background-size: cover; background-position: center;{% endif %}
+    cursor: pointer;
+    h3 span {
+      background-image: linear-gradient(to right, transparent 50%, lighten({{ post.accent }}, 15%) 90%);
+    }
+    @include media-query(1319px) {
+      grid-column: auto / span calc({{ post.tile.width }} + 1);
+      /* grid-row: auto / span calc({{ post.tile.height }} + 1); */
+      margin-left: 0;
+      /* margin-top: 0; */
+    }
+  }
+{% endunless %}{% endunless %}{% endfor %}{% endcapture %}
+{{ tiles_style | scssify }}
+</style>
+
+<tiles class="posts">
+  {% for post in sorted_posts %}{% unless post.hidden %}{% unless post.tile.order < 0 %}
+    <a href="{{ post.url }}" id="tile-{{ post.slug }}" class="tile bg-{{ post.accent }} {{ post.tile.class }}">
+      {% if post.draft %}<span class="draft-banner"><span class="hidden-phone">COMING </span>SOON!</span>{% endif %}
+      <h3><span title="{{ post.title }}">{{ post.title }}</span></h3>
+    </a>
+  {% endunless %}{% endunless %}{% endfor %}
+</tiles>
+
+<!-- <blogroll class="visible-phone">
+  <h2>Recent Posts</h2>
+  <br>
+  {% for post in site.posts %}{% unless post.hidden %}{% unless post.tile.order < 0 %}
+    <a href="{{ post.url }}" class="bg-{{ post.accent }}">
+      <h3>{{ post.title }}</h3>
+      <p class="metadata">
+        {% unless post.draft %}Published {{ post.date | date: "%B %-d, %Y" }} •{% endunless %}
+        {% if post.draft %}Draft •{% endif %}
+        {% if post.hidden %}Patron Exclusive •{% endif %}
+        {% include read-time.html content=post.content %} read
+      </p>
+    </a>
+  {% endunless %}{% endunless %}{% endfor %}
+</blogroll> -->
+
+<!-- <p>
+  Filter by hashtag:
+  <a class="uno" href="/hashtag/dev">#dev</a>
+  <a class="uno" href="/hashtag/design">#design</a>
+  <a class="uno" href="/hashtag/talks">#talks</a>
+  <a class="uno" href="/hashtag/guides">#guides</a>
+ <a class="uno" href="/hashtag/transit">#transit</a>
+</p> -->
+<!--
+<p>
+  <strong>There's more:</strong> check out my extended <a href="/websites" class="uno">websites</a> and <a class="uno" href="https://dribbble.com/pixelyunicorn" target="_blank" rel="noreferrer"><img role="presentation" src="https://icon.now.sh/dribbble/ea4c89" height="14" width="14" /> design</a> portfolios!
+</p>
+-->
+<hr>
+
+<h2 id="about">
+  {% include icons/emoji.svg size="38" %}
+  Here's a lil' <yeet>about me:</yeet>
+</h2>
+
+<p>
+  Nice to meet you!! I'm Brooke: 🍵 sparkly tea witch, 🚆 transit nerd, 🌮 taco advocate, and 🦄 poem unicorn.
+</p>
+
+<p>
+  You can find me on
+  <a class="uno" href="https://instagram.com/brookewardx14?igshid=narlqa0kwfsn" target="_blank" rel="noreferrer"><img role="presentation" src="https://icon.now.sh/instagram" height="14" width="14" /> Instagram</a>,
+ <!-- <a class="uno" href="https://dribbble.com/pixelyunicorn" target="_blank" rel="noreferrer"><img role="presentation" src="https://icon.now.sh/dribbble/ea4c89" height="14" width="14" /> Dribbble</a>,
+  <a class="uno" href="https://twitch.tv/pixelysquid" target="_blank" rel="noreferrer"><img role="presentation" src="https://icon.now.sh/twitch/6441a5" class="visible-theme-light" height="14" width="14" /><img role="presentation" src="https://icon.now.sh/twitch/b9a3e3" class="visible-theme-dark" height="14" width="14" /> Twitch</a>, and
+  <a class="uno" href="https://github.com/pixelyunicorn" target="_blank" rel="noreferrer"><img role="presentation" src="https://icon.now.sh/github/000" class="visible-theme-light" height="14" width="14" /><img role="presentation" src="https://icon.now.sh/github/fff" class="visible-theme-dark" height="14" width="14" /> GitHub</a>. -->
+</p>
+<!--
+<p>
+  Love what I do? Support me thru my 
+  <a class="uno" href="https://cash.app/$pixely" target="_blank" rel="noreferrer">Cash App</a>,
+  <a class="uno" href="https://ko-fi.com/pixely" target="_blank" rel="noreferrer">Ko-Fi</a>,
+  Monzo,
+  <a class="uno" href="https://www.amazon.com/hz/wishlist/ls/1WZCG3ZSOCGUR?ref_=wl_share" target="_blank" rel="noreferrer">Amazon Wish List</a>,
+  or <a class="uno" href="https://patreon.com/madebymelody" target="_blank" rel="noreferrer"> Patreon</a>! 💖
+</p> 
+-->
+<h2>
+  {% include icons/briefcase.svg size="38" %}
+  Let's write something <yeet>cool</yeet> together!
+</h2>
+
+<p>
+  You can keep track of my availability, what I'm working on, and events I'll attending on Instagram
+</p>
+
+<hr>
+
+<p>
+ Built by
+<a class="uno" href="https://github.com/Aakash074/" target="_blank">
+    Groot</i>
+</a></p>
+
+
+<br>
